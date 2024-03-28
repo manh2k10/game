@@ -5,7 +5,8 @@
 #include"card.h"
 using namespace std;
 
-
+vector <card> allcard;
+card CARD;
 const int width=800;
 const int height=600;
 const string title="uno!!";
@@ -17,6 +18,8 @@ int main(int argc, char* args[])
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDLInit(window, renderer,width,height,title);
+
+    CARD.createcard(allcard,renderer);
 
     SDL_Texture* background=loadtexture("images/backgrounds.jpg",renderer);
     SDL_RenderCopy(renderer,background,NULL,NULL);
@@ -60,7 +63,8 @@ int main(int argc, char* args[])
                          {
                              SDL_Texture* newbackground=loadtexture("images/backgrounds3.png",renderer);
                              SDL_RenderCopy(renderer,newbackground,NULL,NULL);
-                             SDL_RenderPresent(renderer);
+;
+                              SDL_RenderPresent(renderer);
                          }
 
 
@@ -69,10 +73,9 @@ int main(int argc, char* args[])
            }
            SDL_Delay(100);
         }
-     createcard();
-     cout<<allcard.size();
-   // //waitkeypressed();
+
+
+
     close(window,renderer);
     return 0;
 }
-
