@@ -1,29 +1,24 @@
 #include "card.h"
-
-card::card() : number(0), color(wild)
-{
-
-
-}
-
-card::card(int num, COLOR col,SDL_Texture* texture) : number(num), color(col),mycard(texture)
+card::card() : number(0), color(wild),mycard(nullptr),soluong(2)
 {
 
 }
 
+card::card(int num, COLOR col,SDL_Texture* texture,int sl) : number(num), color(col),mycard(texture),soluong(sl)
+{
+
+}
 bool card::operator==(card const & other) const
 {
 	return number == other.number || color == other.color || color == wild || other.color == wild;
 
 }
-
-
 bool card::operator!=(card const & other) const
 {
 	return !(*this == other) ;
 }
-card tmp;
-void card::createcard(vector <card> &allcard,SDL_Renderer* renderer)
+
+/*void card::createcard(vector <card> &allcard,SDL_Renderer* renderer)
 {
    // vector <card> allcard;
 
@@ -133,3 +128,4 @@ void card::createcard(vector <card> &allcard,SDL_Renderer* renderer)
     }
 }
 
+*/
