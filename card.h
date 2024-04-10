@@ -12,7 +12,7 @@ class card
 		int number;// 0-9 numbers, +2, skip, reverse, all color, +4 (all color)
 		COLOR color; // 5 colors: red, green, blue, yellow, and no color
         SDL_Texture* mycard;
-        int soluong;
+
 
 		bool operator==(card const & other) const;
 
@@ -20,7 +20,7 @@ class card
 
 		card();
 
-		card(int value, COLOR color,SDL_Texture* texture,int sl);
+		card(int value, COLOR color,SDL_Texture* texture);
 
 
 };
