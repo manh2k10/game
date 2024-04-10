@@ -1,5 +1,5 @@
 
-
+#pragma once
 
 #include<iostream>
 #include<SDL_image.h>
@@ -8,9 +8,13 @@
 using namespace std;
 class ultis
 {
-  public:
+     public:
+
         SDL_Window* window;
         SDL_Renderer* renderer;
+ public:
+
+       // ultis(SDL_Renderer* renderer);
         void SDLInit();
         void close();
         void waitkeypressed();
@@ -20,6 +24,7 @@ class ultis
         void renderTexture(SDL_Texture *texture, int x, int y,int w,int h);
         void blitRect(SDL_Texture *texture, SDL_Rect *src, int x, int y);
         SDL_Rect toado(SDL_Texture *texture, int x, int y);
+
 
 };
 
