@@ -1,6 +1,7 @@
 #define DECK_SIZE 108
 
  #include"deck.h"
+ #include"graphics.h"
 deck::deck()
 {
 	ptr_deck = new card[DECK_SIZE];
@@ -8,13 +9,11 @@ deck::deck()
 
 
 }
-ultis graphics;
-void deck::create()
+
+void deck::create( ultis mygraphics)
 {
    card tmp;
-
-
-    for(int i=wild;i<=yellow;i++)
+   for(int i=wild;i<=yellow;i++)
     {
         string s;
 
@@ -24,13 +23,14 @@ void deck::create()
             {
                 tmp.number=13;
                 tmp.color=wild;
-                tmp.mycard=graphics.loadtexture("images/wild13.png");
+                tmp.mycard=mygraphics.loadtexture("images/wild13.png");
                 ptr_deck[size]=tmp;size++;
                 tmp.number=14;
                 tmp.color=wild;
-                tmp.mycard=graphics.loadtexture("images/wild14.png");
+                tmp.mycard=mygraphics.loadtexture("images/wild14.png");
                 ptr_deck[size]=tmp;
                 size++;
+
             }
 
         }
@@ -51,6 +51,7 @@ void deck::create()
                           }
                           tmp.number=j;
                           tmp.color=red;
+
 
                           break;
                      }
@@ -106,8 +107,9 @@ void deck::create()
 
 
             }
-            tmp.mycard=graphics.loadtexture(s);
-            if(j==0)
+            tmp.mycard=mygraphics.loadtexture(s);
+            if(tmp.mycard==nullptr)cout<<j<<endl;
+            if(j!=0)
                  for(int a=0;a<2;a++)
                  {
                    ptr_deck[size]=tmp;
@@ -123,13 +125,13 @@ void deck::create()
         }
     }
 }
-
+//hàm sao chép của lớp deck
 deck::deck(const deck & other)
 {
 	copy(other);
 }
 
-
+//toán tử gán của lớp deck.
 const deck & deck::operator= (const deck & other)
 {
 	if (this != &other)
@@ -141,7 +143,7 @@ const deck & deck::operator= (const deck & other)
 }
 
 
-
+//hàm hủy
 deck::~deck()
 {
 	clear();
@@ -165,13 +167,12 @@ void deck::shuffle()
 	int pos;
 	for (int i = 0 ; i <size; i++ )
 	{
-		// randomly find a position in temp_deck
-		// change the seed , so randomized number is different each time
+
 		pos = rand() % temp_size;
-		//assign random element to deck[i]
+
 		ptr_deck[i] = temp_deck[pos];
 
-		// removing element from temp_deck (O(n) to shift)
+
 		temp_size--;
 		for (temp_pos = pos ; temp_pos < temp_size ; temp_pos++)
 		{
@@ -184,13 +185,12 @@ void deck::shuffle()
 
 
 }
+//loại bỏ và trả về lá bài trên cùng của bộ bài.
 card deck::draw()
 {
 	if (size <= 0)
 	{
-		// do this inside gameplay
-		//recreate
-		//must take into account cards in player's hands
+
 		return card();
 	}
 	card temp_card = ptr_deck[size-1];
@@ -198,10 +198,10 @@ card deck::draw()
 	return temp_card;
 }
 
-
+// thêm một lá bài mới vào bộ bài.
 int deck::add_card(card temp_card)
 {
-	// O(1) insert
+
 	if(size < DECK_SIZE)
 	{
 		ptr_deck[size] = temp_card;
@@ -212,7 +212,7 @@ int deck::add_card(card temp_card)
 		return -1;
 }
 
-
+// tron bai nhanh
 void deck::quick_shuffle()
 {
 
@@ -222,14 +222,13 @@ void deck::quick_shuffle()
 	card temp_card;
 	while(temp_size > 0 )
 	{
-		//generate random
-		// change the seed , so randomized number is different each time
+
 		pos = rand() % temp_size;
-		// swap elements
+
 		temp_card = ptr_deck[temp_size];
 		ptr_deck[temp_size] = ptr_deck[pos];
 		ptr_deck[pos] = temp_card;
-		// reduce size by 1
+
 		temp_size--;
 	}
 
