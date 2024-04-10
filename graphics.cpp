@@ -31,7 +31,7 @@ SDL_Texture* ultis::loadtexture(string path)
     SDL_Texture* newtexture=nullptr;
     newtexture =IMG_LoadTexture(renderer,path.c_str());
         if(newtexture==nullptr)
-            cout<<SDL_GetError()<<endl;
+            std::cout << "Unable to load image " << path << "! SDL_image Error: " << IMG_GetError() << std::endl;
 
     return newtexture;
 }
