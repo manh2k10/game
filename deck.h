@@ -10,16 +10,15 @@ public:
     deck(const deck &other);
     const deck &operator= (const deck &other);
     ~deck();
-
     void shuffle();
-    void create();
+    void create(ultis graphics);
     card draw();
     int add_card(card temp_card);
     void quick_shuffle();
     int get_size();
 
-private:
-    card* ptr_deck;
+     card* ptr_deck;
+      private:
     int size;
 
     void clear();
