@@ -5,6 +5,7 @@
 #include<SDL_image.h>
 #include<SDL.h>
 #include"def.h"
+
 using namespace std;
 class ultis
 {
@@ -14,7 +15,6 @@ class ultis
         SDL_Renderer* renderer;
  public:
 
-       // ultis(SDL_Renderer* renderer);
         void SDLInit();
         void close();
         void waitkeypressed();
@@ -26,8 +26,7 @@ class ultis
         SDL_Rect toado(SDL_Texture *texture, int x, int y);
 
 
+
 };
-
-
 
 
