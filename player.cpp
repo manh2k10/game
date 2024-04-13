@@ -158,15 +158,19 @@ card player::peek(int pos) const
 }
 void player::print(ultis graphics) const
 {
-    //int temp_size = size;
-    int tempx = 550;
+    std::vector<card_elem*> elements; // Lưu trữ các phần tử theo thứ tự ngược
     card_elem* temp_ptr = head;
     while (temp_ptr != nullptr)
     {
-        graphics.renderTexture(temp_ptr->data.mycard, tempx, 460, 6, 6);
-        tempx -= 50;
-        SDL_RenderPresent(graphics.renderer);
-        SDL_Delay(10);
+        elements.push_back(temp_ptr);
         temp_ptr = temp_ptr->next;
     }
+
+    int tempx = 550;
+    for (int i = elements.size() - 1; i >= 0; i--)
+    {
+        graphics.renderTexture(elements[i]->data.mycard, tempx, 460, 6, 6);
+        tempx -= 50;
+    }
+    SDL_RenderPresent(graphics.renderer);
 }
