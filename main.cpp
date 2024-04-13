@@ -41,6 +41,7 @@ int main(int argc, char* args[])
     bool kt=false,running=true;
     while (running)
     {
+      // Uint32 windowID = SDL_GetWindowID(graphics.window);
         while( SDL_PollEvent(&e) != 0)
         {
             if(e.type == SDL_QUIT)running=false;
@@ -64,16 +65,19 @@ int main(int argc, char* args[])
                 SDL_RenderPresent(graphics.renderer);
                 for(int i=0;i<7;i++)
                 {
+
+                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array[0], i+1);
                     card temp_card;
 			        temp_card = main_deck.draw();
 			        play_array[0].hand_add(temp_card);
-                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 220, targetX, targetY, play_array[0], i+1);
                     graphics.renderTexture(temp_card.mycard, targetX, targetY, 6, 6);
-                  graphics.renderTexture(backcard, targetX, targetY-420, 6, 6);
+
+                    graphics.renderTexture(backcard, targetX, targetY-420, 6, 6);
                     targetX -= 50;
                     SDL_Delay(10);
+                      SDL_RenderPresent(graphics.renderer);
                 }
-                SDL_RenderPresent(graphics.renderer);
+              //  SDL_RenderPresent(graphics.renderer);
                 cardDealt=true;
 
 
