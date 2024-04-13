@@ -258,4 +258,61 @@ int deck::get_size()
 {
 	return size;
 }
+void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis graphics, int startX, int startY, int endX, int endY, player temp_player, int tong) {
+    int frames = 10; // Số khung hình trong quá trình di chuyển
+    int currentFrame = 0;
 
+    int deltaX = (endX - startX) / frames;
+    int deltaY = (420-endY + startY) / frames;
+
+    int currentX = startX;
+    int currentY = startY;
+
+     while (currentFrame <= frames) {
+        SDL_RenderClear(graphics.renderer);
+        SDL_RenderCopy(graphics.renderer, background, NULL, NULL);
+        graphics.renderTexture(texture, startX, startY, 6, 6);
+        temp_player.print(graphics);
+        for (int i = 0; i < tong - 1; i++) {
+            graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY - 420, 6, 6);
+        }
+
+        graphics.renderTexture(texture, currentX, currentY, 6, 6);
+        SDL_RenderPresent(graphics.renderer);
+
+        currentX += deltaX;
+        currentY -= deltaY;
+
+        currentFrame++;
+
+        SDL_Delay(26); // Đợi một thời gian ngắn giữa các khung hình
+    }
+
+
+    currentFrame = 0;
+    currentX = startX;
+    currentY = startY;
+    deltaY = (endY-startY) / frames;
+
+
+    while (currentFrame <= frames) {
+        SDL_RenderClear(graphics.renderer);
+        SDL_RenderCopy(graphics.renderer, background, NULL, NULL);
+        graphics.renderTexture(texture, startX, startY, 6, 6);
+        temp_player.print(graphics);
+        for (int i = 0; i < tong - 1; i++) {
+            //graphics.renderTexture(temp_deck.ptr_deck[2 * i].mycard, endX + (tong - i - 1) * 50, endY, 6, 6);
+            graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY - 420, 6, 6);
+        }
+
+        graphics.renderTexture(texture, currentX, currentY, 6, 6);
+        SDL_RenderPresent(graphics.renderer);
+
+        currentX += deltaX;
+        currentY += deltaY;
+
+        currentFrame++;
+
+        SDL_Delay(26); // Đợi một thời gian ngắn giữa các khung hình
+    }
+}
