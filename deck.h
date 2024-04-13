@@ -2,8 +2,8 @@
 #include "card.h"
 #include <cstdlib>
 #include <ctime>
+#include"player.h"
 #include "graphics.h"
-
 class deck : public card {
 public:
     deck();
@@ -16,8 +16,9 @@ public:
     int add_card(card temp_card);
     void quick_shuffle();
     int get_size();
-
+    void animateDeal(SDL_Texture* texture,SDL_Texture* background,ultis graphics,int startX, int startY, int endX, int endY,player temp_player,int tong);
      card* ptr_deck;
+
       private:
     int size;
 
