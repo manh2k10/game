@@ -263,49 +263,46 @@ void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis grap
     int currentFrame = 0;
 
     int deltaX = (endX - startX) / frames;
-    int deltaY = (420-endY + startY) / frames;
+    int deltaY = (endY-startY) / frames;
 
     int currentX = startX;
     int currentY = startY;
 
-     while (currentFrame <= frames) {
-        SDL_RenderClear(graphics.renderer);
-        SDL_RenderCopy(graphics.renderer, background, NULL, NULL);
-        graphics.renderTexture(texture, startX, startY, 6, 6);
-        temp_player.print(graphics);
-        for (int i = 0; i < tong - 1; i++) {
-            graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY - 420, 6, 6);
-        }
+    // Tạo hai bộ đệm riêng biệt
+    SDL_Texture* bufferTexture1 = SDL_CreateTexture(graphics.renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+    SDL_Texture* bufferTexture2 = SDL_CreateTexture(graphics.renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
 
-        graphics.renderTexture(texture, currentX, currentY, 6, 6);
-        SDL_RenderPresent(graphics.renderer);
-
-        currentX += deltaX;
-        currentY -= deltaY;
-
-        currentFrame++;
-
-        SDL_Delay(26); // Đợi một thời gian ngắn giữa các khung hình
-    }
-
-
-    currentFrame = 0;
-    currentX = startX;
-    currentY = startY;
-    deltaY = (endY-startY) / frames;
-
+    // Chọn bộ đệm hiển thị ban đầu là bufferTexture1
+    SDL_Texture* displayBuffer = bufferTexture1;
 
     while (currentFrame <= frames) {
+        // Chuyển đổi bộ đệm hiển thị
+        if (displayBuffer == bufferTexture1) {
+            displayBuffer = bufferTexture2;
+        } else {
+            displayBuffer = bufferTexture1;
+        }
+
+        // Chọn bộ đệm làm mục tiêu vẽ
+        SDL_SetRenderTarget(graphics.renderer, displayBuffer);
+
+        // Xóa bộ đệm
         SDL_RenderClear(graphics.renderer);
+
+        // Vẽ các phần tử cố định lên bộ đệm
         SDL_RenderCopy(graphics.renderer, background, NULL, NULL);
-        graphics.renderTexture(texture, startX, startY, 6, 6);
+        graphics.renderTexture(texture,startX,startY,6,6);
         temp_player.print(graphics);
         for (int i = 0; i < tong - 1; i++) {
-            //graphics.renderTexture(temp_deck.ptr_deck[2 * i].mycard, endX + (tong - i - 1) * 50, endY, 6, 6);
             graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY - 420, 6, 6);
         }
 
+        // Vẽ phần tử di chuyển lên bộ đệm
         graphics.renderTexture(texture, currentX, currentY, 6, 6);
+
+        // Chuyển đổi bộ đệm hiển thị lên màn hình
+        SDL_SetRenderTarget(graphics.renderer, NULL);
+        SDL_RenderCopy(graphics.renderer, displayBuffer, NULL, NULL);
         SDL_RenderPresent(graphics.renderer);
 
         currentX += deltaX;
@@ -313,6 +310,10 @@ void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis grap
 
         currentFrame++;
 
-        SDL_Delay(26); // Đợi một thời gian ngắn giữa các khung hình
+        SDL_Delay(10); // Đợi một thời gian ngắn giữa các khung hình
     }
+
+    // Giải phóng bộ đệm
+    SDL_DestroyTexture(bufferTexture1);
+    SDL_DestroyTexture(bufferTexture2);
 }
