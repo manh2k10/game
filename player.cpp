@@ -1,15 +1,11 @@
-/*#include "card.h"
+#include "card.h"
 #include "player.h"
-
-
 
 player::player()
 {
 	head = NULL;
 	size = 0;
 }
-
-
 player::player(const player & other)
 {
 	copy(other);
@@ -26,14 +22,10 @@ const player & player::operator= (const player & other)
 	return *this;
 
 }
-
-
 player::~player()
 {
 	clear();
 }
-
-
 void player::hand_add(card temp_card)
 {
 
@@ -164,7 +156,17 @@ card player::peek(int pos) const
 	return temp_elem->data;
 
 }
-
-
-
-*/
+void player::print(ultis graphics) const
+{
+    //int temp_size = size;
+    int tempx = 550;
+    card_elem* temp_ptr = head;
+    while (temp_ptr != nullptr)
+    {
+        graphics.renderTexture(temp_ptr->data.mycard, tempx, 460, 6, 6);
+        tempx -= 50;
+        SDL_RenderPresent(graphics.renderer);
+        SDL_Delay(10);
+        temp_ptr = temp_ptr->next;
+    }
+}
