@@ -32,8 +32,8 @@ int main(int argc, char* args[])
 
 
     SDL_RenderPresent(graphics.renderer);
-    int cardX = 300; // Tọa độ X ban đầu của quân bài
-    int cardY = 220; // Tọa độ Y ban đầu của quân bài
+   // int cardX = 300; // Tọa độ X ban đầu của quân bài
+   // int cardY = 220; // Tọa độ Y ban đầu của quân bài
     int targetX = 550; // Tọa độ X mục tiêu của quân bài
     int targetY = 460; // Tọa độ Y mục tiêu của quân bài
     bool cardDealt = false;
@@ -66,13 +66,15 @@ int main(int argc, char* args[])
                 for(int i=0;i<7;i++)
                 {
 
-                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array[0], i+1);
+                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array);
 
                     card temp_card;
 			        temp_card = main_deck.draw();
 			        play_array[0].hand_add(temp_card);
                     graphics.renderTexture(temp_card.mycard, targetX, targetY, 6, 6);
-                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY-420, play_array[0], i+1);
+                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
+                    temp_card = main_deck.draw();
+			        play_array[1].hand_add(temp_card);
                     graphics.renderTexture(backcard, targetX, targetY-420, 6, 6);
                     targetX -= 50;
                     SDL_Delay(10);
@@ -80,9 +82,28 @@ int main(int argc, char* args[])
                 }
               //  SDL_RenderPresent(graphics.renderer);
                 cardDealt=true;
+                deck temp_deck;
+            card played_card;
+            card temp_card;
+	        int card_flag = 0 ;
+	        while (card_flag == 0 )
+            {
+                    temp_card = main_deck.draw();
+                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, 400, 250, play_array);
+                    graphics.renderTexture(temp_card.mycard, 400, 250, 6, 6);
+                    SDL_RenderPresent(graphics.renderer);
+                    if (temp_card.color != wild)
+                    {
+			            card_flag = 1;
+                        played_card = temp_card;
+		            }
+                    /* if first card is wild, redraw */
+		            else
+			        temp_deck.add_card(temp_card);
 
-
+	         }
             }
+
 
         }
     }
