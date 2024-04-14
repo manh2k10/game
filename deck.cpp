@@ -294,7 +294,8 @@ void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis grap
         graphics.renderTexture(texture,startX,startY,6,6);
         temp_player.print(graphics);
         for (int i = 0; i < tong - 1; i++) {
-            graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY - 420, 6, 6);
+           if(deltaY>0) graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY-420, 6, 6);
+           else graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY, 6, 6);
         }
 
         // Vẽ phần tử di chuyển lên bộ đệm
