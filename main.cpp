@@ -51,7 +51,7 @@ int main(int argc, char* args[])
                 if(e.button.button==SDL_BUTTON_LEFT)
                 {
                     SDL_GetMouseState(&x,&y);
-                    if(graphics.inside(x,y,graphics.toado(play,320,370)))
+                    if(graphics.inside(x,y,graphics.toado(play,390,380)))
                     {
                         kt=true;
                     }
@@ -102,11 +102,90 @@ int main(int argc, char* args[])
 			        temp_deck.add_card(temp_card);
 
 	         }
-            }
+	         srand(time(NULL));
+	         int turn = rand() % 2;
+	         bool force_draw_bool = false;
+	         int turn_flag = 1;
+	         int win = 0 ;
+	         while (win == 0 )
+	          {
+		        player * curr_player = &play_array[turn%2];
+		        if (force_draw_bool)
+		        {
+		            if (played_card.number == 10)
+		            {
+		                card draw_2;
+		                for (int i = 0 ; i < 2; i ++)
+			            {
+			                draw_2 = main_deck.draw();
+                            curr_player->hand_add(draw_2);
+			            }
+                    }
+		            if (played_card.number == 14)
+		            {
+		                card draw_4;
+			            for (int i = 0 ; i < 4; i ++)
+			            {
+				         draw_4 = main_deck.draw();
+				         curr_player->hand_add(draw_4);
+			            }
+
+		            }
+			     force_draw_bool = false;
+		       }
+		       int check_flag = 0 ;
+               int index;
+               int size = curr_player->get_size();
+               while (check_flag == 0)
+               {
+                   if(e.type==SDL_MOUSEBUTTONDOWN)
+                   {
+                       if(e.button.button==SDL_BUTTON_LEFT)
+                       {
+                           SDL_GetMouseState(&x,&y);
+                           if(graphics.inside(x,y,graphics.toado(backcard,300,220)))
+                           {
+                               card draw_temp;
+                               draw_temp = main_deck.draw();
+				               if (draw_temp.color == played_card.color || draw_temp.color == wild||draw_temp.number == played_card.number)
+                               {
+                                  int play_draw_flag = 0 ;
+                                  while (play_draw_flag == 0 )
+                                  {
+                                      string temp_play="y";
+                                      if (temp_play == "y")
+					                  {
+					                 	     played_card = draw_temp;
+						                     temp_deck.add_card(draw_temp);
+						                     if (played_card.number >= 10 && played_card.number <= 14)
+						                             force_draw_bool = true;
+						                             play_draw_flag = 1;
+                                       }
+					                    if (temp_play == "n")
+					                     {
+					                      	curr_player->hand_add(draw_temp);
+					                      	play_draw_flag = 1;
+                                         }
+                                  } }
+                               }
+                           }
+                         }
+                       }
+
+
+
+
+                    }
+
+
+
+               }
+
+              }
 
 
         }
-    }
+
      graphics.free(background);
      graphics.free(backcard);
      graphics.free(play);
