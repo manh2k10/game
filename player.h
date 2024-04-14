@@ -1,6 +1,8 @@
 #pragma once
 #include "card.h"
 #include "graphics.h"
+#include"SDL.h"
+#include"SDL_image.h"
 class player
 {
 	public:
@@ -11,7 +13,7 @@ class player
 		void hand_add(card temp);
 		card hand_remove(int pos);
 		void uno();
-        void print(ultis graphics) const;
+        void print(ultis graphics,int y_pos,SDL_Texture* texture,bool kt) const;
 		int get_size() const;
 		card peek(int pos) const;
 	private:
