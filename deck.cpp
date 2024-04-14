@@ -258,9 +258,10 @@ int deck::get_size()
 {
 	return size;
 }
-void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis graphics, int startX, int startY, int endX, int endY, player temp_player, int tong) {
+void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis graphics, int startX, int startY, int endX, int endY, player temp_player[]) {
     int frames = 10; // Số khung hình trong quá trình di chuyển
     int currentFrame = 0;
+   // int endx=550;
 
     int deltaX = (endX - startX) / frames;
     int deltaY = (endY-startY) / frames;
@@ -292,11 +293,8 @@ void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis grap
         // Vẽ các phần tử cố định lên bộ đệm
         SDL_RenderCopy(graphics.renderer, background, NULL, NULL);
         graphics.renderTexture(texture,startX,startY,6,6);
-        temp_player.print(graphics);
-        for (int i = 0; i < tong - 1; i++) {
-           if(deltaY>0) graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY-420, 6, 6);
-           else graphics.renderTexture(texture, endX + (tong - i - 1) * 50, endY, 6, 6);
-        }
+        temp_player[0].print(graphics,460,texture,true);
+        temp_player[1].print(graphics,40,texture,false);
 
         // Vẽ phần tử di chuyển lên bộ đệm
         graphics.renderTexture(texture, currentX, currentY, 6, 6);
