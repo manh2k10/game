@@ -67,11 +67,12 @@ int main(int argc, char* args[])
                 {
 
                     main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array[0], i+1);
+
                     card temp_card;
 			        temp_card = main_deck.draw();
 			        play_array[0].hand_add(temp_card);
                     graphics.renderTexture(temp_card.mycard, targetX, targetY, 6, 6);
-
+                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY-420, play_array[0], i+1);
                     graphics.renderTexture(backcard, targetX, targetY-420, 6, 6);
                     targetX -= 50;
                     SDL_Delay(10);
