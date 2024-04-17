@@ -18,17 +18,14 @@ int main(int argc, char* args[])
     player * play_array;
 	play_array = new player[2];
 
-
-
     SDL_Texture* background=graphics.loadtexture("images/backgrounds.jpg");
     SDL_Texture* character=graphics.loadtexture("images/bg.png");
     SDL_Texture* play=graphics.loadtexture("images/switch.png");
     SDL_Texture* newbackground=graphics.loadtexture("images/backgrounds3.png");
     SDL_Texture* backcard=graphics.loadtexture("images/back.png");
-
     SDL_RenderCopy(graphics.renderer,background,NULL,NULL);
     graphics.renderTexture(character,285,95,10,10);
-    graphics.renderTexture(play,390,380,7,7);
+    graphics.renderTexture(backcard,390,380,6,6);
 
 
     SDL_RenderPresent(graphics.renderer);
@@ -42,7 +39,7 @@ int main(int argc, char* args[])
     while (running)
     {
       // Uint32 windowID = SDL_GetWindowID(graphics.window);
-        while( SDL_PollEvent(&e) != 0)
+        if( SDL_PollEvent(&e) != 0)
         {
             if(e.type == SDL_QUIT)running=false;
             int x,y;
@@ -51,9 +48,11 @@ int main(int argc, char* args[])
                 if(e.button.button==SDL_BUTTON_LEFT)
                 {
                     SDL_GetMouseState(&x,&y);
-                    if(graphics.inside(x,y,graphics.toado(play,390,380)))
+                    cout<<x<<' '<<y<<endl;
+                    if(graphics.inside(x,y,graphics.toado(play,390,380,7,7)))
                     {
-                        kt=true;
+                        kt=false;
+
                     }
                 }
             }
@@ -67,9 +66,10 @@ int main(int argc, char* args[])
                 {
 
                     main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array);
-
                     card temp_card;
 			        temp_card = main_deck.draw();
+			        temp_card.toadox=targetX;
+			        temp_card.toadoy=targetY;
 			        play_array[0].hand_add(temp_card);
                     graphics.renderTexture(temp_card.mycard, targetX, targetY, 6, 6);
                     main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
@@ -91,6 +91,7 @@ int main(int argc, char* args[])
                     temp_card = main_deck.draw();
                     main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, 400, 250, play_array);
                     graphics.renderTexture(temp_card.mycard, 400, 250, 6, 6);
+
                     SDL_RenderPresent(graphics.renderer);
                     if (temp_card.color != wild)
                     {
@@ -102,14 +103,15 @@ int main(int argc, char* args[])
 			        temp_deck.add_card(temp_card);
 
 	         }
-	         srand(time(NULL));
-	         int turn = rand() % 2;
 	         bool force_draw_bool = false;
 	         int turn_flag = 1;
 	         int win = 0 ;
+
 	         while (win == 0 )
 	          {
-		        player * curr_player = &play_array[turn%2];
+                graphics.renderTexture(played_card.mycard,400,250,6,6);
+                SDL_RenderPresent(graphics.renderer);
+		        player * curr_player = &play_array[0];
 		        if (force_draw_bool)
 		        {
 		            if (played_card.number == 10)
@@ -134,48 +136,38 @@ int main(int argc, char* args[])
 			     force_draw_bool = false;
 		       }
 		       int check_flag = 0 ;
-               int index;
+               //int index;
                int size = curr_player->get_size();
                while (check_flag == 0)
                {
+                   if( SDL_PollEvent(&e) != 0){
                    if(e.type==SDL_MOUSEBUTTONDOWN)
                    {
                        if(e.button.button==SDL_BUTTON_LEFT)
                        {
                            SDL_GetMouseState(&x,&y);
-                           if(graphics.inside(x,y,graphics.toado(backcard,300,220)))
+
+                           if(graphics.inside(x,y,graphics.toado(backcard,300,220,6,6)))
                            {
                                card draw_temp;
+                                main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array);
                                draw_temp = main_deck.draw();
-				               if (draw_temp.color == played_card.color || draw_temp.color == wild||draw_temp.number == played_card.number)
-                               {
-                                  int play_draw_flag = 0 ;
-                                  while (play_draw_flag == 0 )
-                                  {
-                                      string temp_play="y";
-                                      if (temp_play == "y")
-					                  {
-					                 	     played_card = draw_temp;
-						                     temp_deck.add_card(draw_temp);
-						                     if (played_card.number >= 10 && played_card.number <= 14)
-						                             force_draw_bool = true;
-						                             play_draw_flag = 1;
-                                       }
-					                    if (temp_play == "n")
-					                     {
-					                      	curr_player->hand_add(draw_temp);
-					                      	play_draw_flag = 1;
-                                         }
-                                  } }
-                               }
-                           }
-                         }
-                       }
+                               curr_player->hand_add(draw_temp);
 
+                               graphics.renderTexture(draw_temp.mycard, targetX, targetY, 6, 6);
+                               SDL_RenderPresent(graphics.renderer);
+                               targetX-=50;
 
-
+                               check_flag=1;
+                            }
+                          //  if(graphics.inside(x,y,graphics.toado(backcard,300,220)))
+                        }
 
                     }
+               }
+               }
+
+	           }
 
 
 
