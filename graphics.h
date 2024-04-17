@@ -23,7 +23,7 @@ class ultis
         void free(SDL_Texture* &texture);
         void renderTexture(SDL_Texture *texture, int x, int y,int w,int h);
         void blitRect(SDL_Texture *texture, SDL_Rect *src, int x, int y);
-        SDL_Rect toado(SDL_Texture *texture, int x, int y);
+        SDL_Rect toado(SDL_Texture *texture, int x, int y,int w,int h);
 
 
 
