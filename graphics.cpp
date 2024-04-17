@@ -87,8 +87,9 @@ void ultis::renderTexture(SDL_Texture *texture, int x, int y,int w,int h)
         dest.w/=w;
         dest.h/=h;
         SDL_RenderCopy(renderer, texture, NULL, &dest);
+        cout<<dest.x<<" "<<dest.y<<" "<<dest.w<<" "<< dest.h<<endl;
     }
-SDL_Rect ultis::toado(SDL_Texture *texture, int x, int y)
+SDL_Rect ultis::toado(SDL_Texture *texture, int x, int y,int w,int h)
 {
 
         SDL_Rect dest;
@@ -96,6 +97,9 @@ SDL_Rect ultis::toado(SDL_Texture *texture, int x, int y)
         dest.x = x;
         dest.y = y;
         SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
+        dest.w/=w;
+        dest.h/=h;
+
         return dest;
 }
 
