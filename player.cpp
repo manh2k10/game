@@ -39,42 +39,45 @@ void player::hand_add(card temp_card)
 
 }
 
-card player::hand_remove(int pos)
+card player::hand_remove(card tmp)
 {
-	card_elem * prev_ptr = head;
-	card_elem * target = prev_ptr->next;
-	card temp_card;
-	int temp_pos = pos;
+    card_elem* prev_ptr = head;
+    card_elem* target = prev_ptr->next;
+    card temp_card;
 
-	if (pos == 0 )
-	{
+    if (head != nullptr && head->data.toadox == tmp.toadox && head->data.toadoy == tmp.toadoy)
+    {
+        temp_card = head->data;
+        head = head->next;
+        size--;
+        return temp_card;
+    }
 
-		temp_card = head->data;
 
-		head = head->next;
+    while (target != nullptr)
+    {
+        if (target->data.toadox == tmp.toadox && target->data.toadoy == tmp.toadoy)
+        {
+            card_elem* temp = head;
 
-		size--;
-		return temp_card;
-	}
+             while (temp != target )
+            {
+              temp->data.toadox += 50;
+              temp = temp->next;
+            }
+            prev_ptr->next = target->next;
+            temp_card = target->data;
+            delete target;
+             size--;
+            return temp_card;
+        }
+        prev_ptr = target;
+        target = target->next;
+    }
 
-	while (temp_pos > 1 )
-	{
-		prev_ptr = prev_ptr->next;
-		target = prev_ptr->next;
-		temp_pos--;
-
-	}
-
-	prev_ptr->next = target->next;
-
-	temp_card = target->data;
-
-	delete target;
-
-	size--;
-
- 	return temp_card;
-
+    // Trường hợp không tìm thấy lá bài có tọa độ (x, y)
+    // Có thể xử lý bằng cách trả về giá trị mặc định hoặc thông báo lỗi
+    return card();
 }
 
 
@@ -143,14 +146,16 @@ int player::get_size() const
 
 
 
-card player::peek(int pos) const
+card player::peek(int x,int y) const
 {
-	int temp_pos = pos;
+
 	card_elem * temp_elem = head;
-	while (temp_pos > 0 )
+	while ( temp_elem!=nullptr)
 	{
+	    if((x>=temp_elem->data.toadox)+31&&(x<temp_elem->data.toadox+81)&&(y>=temp_elem->data.toadoy)&&(y<temp_elem->data.toadoy+126))
+            	return temp_elem->data;
 		temp_elem = temp_elem->next;
-		temp_pos--;
+
 	}
 
 	return temp_elem->data;
@@ -172,6 +177,7 @@ void player::print(ultis graphics, int y_pos,SDL_Texture* texture,bool kt) const
         if(kt)graphics.renderTexture(elements[i]->data.mycard, tempx, y_pos, 6, 6);
         else graphics.renderTexture(texture, tempx, y_pos, 6, 6);
         tempx -= 50;
+        cout<<elements[i]->data.toadox<<' '<<elements[i]->data.color<<' '<<elements[i]->data.number<<endl;
     }
     SDL_RenderPresent(graphics.renderer);
 }

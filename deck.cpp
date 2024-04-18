@@ -13,7 +13,7 @@ deck::deck()
 void deck::create( ultis mygraphics)
 {
    card tmp;
-   for(int i=wild;i<=yellow;i++)
+   for(int i=0;i<=4;i++)
     {
         string s;
 
@@ -101,7 +101,7 @@ void deck::create( ultis mygraphics)
                               case 12:s.insert(13,"12");break;
                           }
                           tmp.number=j;
-
+                         tmp.color=yellow;
                           break;
                      }
 
@@ -258,7 +258,7 @@ int deck::get_size()
 {
 	return size;
 }
-void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis graphics, int startX, int startY, int endX, int endY, player temp_player[]) {
+void deck::animateDeal(SDL_Texture* texture1,SDL_Texture* texture2, SDL_Texture* background, ultis graphics, int startX, int startY, int endX, int endY, player temp_player[]) {
     int frames = 10; // Số khung hình trong quá trình di chuyển
     int currentFrame = 0;
    // int endx=550;
@@ -292,12 +292,12 @@ void deck::animateDeal(SDL_Texture* texture, SDL_Texture* background, ultis grap
 
         // Vẽ các phần tử cố định lên bộ đệm
         SDL_RenderCopy(graphics.renderer, background, NULL, NULL);
-        graphics.renderTexture(texture,startX,startY,6,6);
-        temp_player[0].print(graphics,460,texture,true);
-        temp_player[1].print(graphics,40,texture,false);
+         graphics.renderTexture(texture1,300,250,6,6);
+        temp_player[0].print(graphics,460,texture1,true);
+        temp_player[1].print(graphics,40,texture1,false);
 
         // Vẽ phần tử di chuyển lên bộ đệm
-        graphics.renderTexture(texture, currentX, currentY, 6, 6);
+        graphics.renderTexture(texture2, currentX, currentY, 6, 6);
 
         // Chuyển đổi bộ đệm hiển thị lên màn hình
         SDL_SetRenderTarget(graphics.renderer, NULL);

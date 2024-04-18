@@ -11,11 +11,11 @@ class player
 		const player & operator= (const player & other);
 		~player();
 		void hand_add(card temp);
-		card hand_remove(int pos);
+		card hand_remove(card tmp);
 		void uno();
         void print(ultis graphics,int y_pos,SDL_Texture* texture,bool kt) const;
 		int get_size() const;
-		card peek(int pos) const;
+		card peek(int x,int y) const;
 	private:
 		class card_elem
 		{

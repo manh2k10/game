@@ -23,9 +23,10 @@ int main(int argc, char* args[])
     SDL_Texture* play=graphics.loadtexture("images/switch.png");
     SDL_Texture* newbackground=graphics.loadtexture("images/backgrounds3.png");
     SDL_Texture* backcard=graphics.loadtexture("images/back.png");
+    SDL_Texture* choosecolor=graphics.loadtexture("images/choosecolor.png");
     SDL_RenderCopy(graphics.renderer,background,NULL,NULL);
     graphics.renderTexture(character,285,95,10,10);
-    graphics.renderTexture(backcard,390,380,6,6);
+    graphics.renderTexture(play,390,430,6,6);
 
 
     SDL_RenderPresent(graphics.renderer);
@@ -49,9 +50,9 @@ int main(int argc, char* args[])
                 {
                     SDL_GetMouseState(&x,&y);
                     cout<<x<<' '<<y<<endl;
-                    if(graphics.inside(x,y,graphics.toado(play,390,380,7,7)))
+                    if(graphics.inside(x,y,graphics.toado(play,390,430,6,6)))
                     {
-                        kt=false;
+                        kt=true;
 
                     }
                 }
@@ -65,14 +66,14 @@ int main(int argc, char* args[])
                 for(int i=0;i<7;i++)
                 {
 
-                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array);
+                    main_deck.animateDeal(backcard,backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array);
                     card temp_card;
 			        temp_card = main_deck.draw();
 			        temp_card.toadox=targetX;
 			        temp_card.toadoy=targetY;
 			        play_array[0].hand_add(temp_card);
                     graphics.renderTexture(temp_card.mycard, targetX, targetY, 6, 6);
-                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
+                    main_deck.animateDeal(backcard,backcard, newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
                     temp_card = main_deck.draw();
 			        play_array[1].hand_add(temp_card);
                     graphics.renderTexture(backcard, targetX, targetY-420, 6, 6);
@@ -89,7 +90,7 @@ int main(int argc, char* args[])
 	        while (card_flag == 0 )
             {
                     temp_card = main_deck.draw();
-                    main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, 400, 250, play_array);
+                    main_deck.animateDeal(backcard,backcard, newbackground, graphics, 300, 250, 400, 250, play_array);
                     graphics.renderTexture(temp_card.mycard, 400, 250, 6, 6);
 
                     SDL_RenderPresent(graphics.renderer);
@@ -104,11 +105,12 @@ int main(int argc, char* args[])
 
 	         }
 	         bool force_draw_bool = false;
-	         int turn_flag = 1;
+	        // int turn_flag = 1;
 	         int win = 0 ;
 
 	         while (win == 0 )
 	          {
+
                 graphics.renderTexture(played_card.mycard,400,250,6,6);
                 SDL_RenderPresent(graphics.renderer);
 		        player * curr_player = &play_array[0];
@@ -137,7 +139,7 @@ int main(int argc, char* args[])
 		       }
 		       int check_flag = 0 ;
                //int index;
-               int size = curr_player->get_size();
+              // int size = curr_player->get_size();
                while (check_flag == 0)
                {
                    if( SDL_PollEvent(&e) != 0){
@@ -150,17 +152,50 @@ int main(int argc, char* args[])
                            if(graphics.inside(x,y,graphics.toado(backcard,300,220,6,6)))
                            {
                                card draw_temp;
-                                main_deck.animateDeal(backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array);
+                                main_deck.animateDeal(backcard,backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array);
                                draw_temp = main_deck.draw();
                                curr_player->hand_add(draw_temp);
-
                                graphics.renderTexture(draw_temp.mycard, targetX, targetY, 6, 6);
                                SDL_RenderPresent(graphics.renderer);
                                targetX-=50;
 
                                check_flag=1;
                             }
-                          //  if(graphics.inside(x,y,graphics.toado(backcard,300,220)))
+
+                             card tmp=curr_player->peek(x,y);
+                             cout<<tmp.number<<' '<<tmp.color<<endl;
+                             if(tmp.color==played_card.color||tmp.number==played_card.number||tmp.color==0)
+                             {
+                                    check_flag=1;
+                                    curr_player->hand_remove(tmp);
+                                    main_deck.animateDeal(backcard,tmp.mycard, newbackground, graphics, tmp.toadox, tmp.toadoy, 400, 250, play_array);
+                                    temp_deck.add_card(tmp);
+                                    played_card = tmp;
+                                    if(played_card.color==wild)
+                                    {
+                                         graphics.renderTexture(choosecolor,500,250,8,8);
+                                         SDL_RenderPresent(graphics.renderer);
+                                         SDL_Event a;
+                                         if( SDL_PollEvent(&a) != 0)
+                                        {
+                                            cout<<"tue";
+                                           if(a.type==SDL_MOUSEBUTTONDOWN)
+                                           {
+                                            if(a.button.button==SDL_BUTTON_LEFT)
+                                            {
+                                             SDL_GetMouseState(&x,&y);
+                                             cout<<x<<y;
+                                             if(graphics.inside(x,y,graphics.toado(choosecolor,500,250,8,8)))
+                                                cout<<"true"<<endl;
+
+                                            }
+                                           }
+                                        }
+
+                                    }
+
+
+                             }
                         }
 
                     }
