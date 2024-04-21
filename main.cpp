@@ -138,17 +138,20 @@ int main(int argc, char* args[])
 			     force_draw_bool = false;
 		       }
 		       int check_flag = 0 ;
+		      // cout<<played_card.color<<"ok"<<endl;
                //int index;
               // int size = curr_player->get_size();
                while (check_flag == 0)
                {
+
                    if( SDL_PollEvent(&e) != 0){
                    if(e.type==SDL_MOUSEBUTTONDOWN)
                    {
                        if(e.button.button==SDL_BUTTON_LEFT)
                        {
                            SDL_GetMouseState(&x,&y);
-
+                           if(graphics.inside(x,y,graphics.toado(choosecolor,500,250,8,8)))
+                           {cout<<"1";break;}
                            if(graphics.inside(x,y,graphics.toado(backcard,300,220,6,6)))
                            {
                                card draw_temp;
@@ -159,7 +162,7 @@ int main(int argc, char* args[])
                                SDL_RenderPresent(graphics.renderer);
                                targetX-=50;
 
-                               check_flag=1;
+                               break;
                             }
 
                              card tmp=curr_player->peek(x,y);
@@ -175,27 +178,13 @@ int main(int argc, char* args[])
                                     {
                                          graphics.renderTexture(choosecolor,500,250,8,8);
                                          SDL_RenderPresent(graphics.renderer);
-                                         SDL_Event a;
-                                         if( SDL_PollEvent(&a) != 0)
-                                        {
-                                            cout<<"tue";
-                                           if(a.type==SDL_MOUSEBUTTONDOWN)
-                                           {
-                                            if(a.button.button==SDL_BUTTON_LEFT)
-                                            {
-                                             SDL_GetMouseState(&x,&y);
-                                             cout<<x<<y;
-                                             if(graphics.inside(x,y,graphics.toado(choosecolor,500,250,8,8)))
-                                                cout<<"true"<<endl;
 
-                                            }
-                                           }
-                                        }
 
                                     }
 
 
                              }
+
                         }
 
                     }
