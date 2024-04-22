@@ -1,5 +1,6 @@
 #include "card.h"
 #include "player.h"
+#include <cmath>
 
 player::player()
 {
@@ -32,6 +33,7 @@ void player::hand_add(card temp_card)
 	card_elem * temp_ptr;
 	temp_ptr = new card_elem();
 	temp_ptr->data = temp_card;
+//	temp_ptr->data.toadox = head->data.toadox+50;;
 	temp_ptr->next = head;
 
 	head = temp_ptr;
@@ -144,8 +146,6 @@ int player::get_size() const
 	return size;
 }
 
-
-
 card player::peek(int x,int y) const
 {
 
@@ -170,14 +170,23 @@ void player::print(ultis graphics, int y_pos,SDL_Texture* texture,bool kt) const
         elements.push_back(temp_ptr);
         temp_ptr = temp_ptr->next;
     }
+      int disbtw2card;
+    if(size> (int)mxwid/wcard)
+           disbtw2card=mxwid/size;
+    else
+          disbtw2card=wcard;
+    int tempx = (width+(size-2)*disbtw2card)/2;
 
-    int tempx = 550;
+   cout<<disbtw2card*size<<endl;
     for (int i = elements.size() - 1; i >= 0; i--)
     {
         if(kt)graphics.renderTexture(elements[i]->data.mycard, tempx, y_pos, 6, 6);
         else graphics.renderTexture(texture, tempx, y_pos, 6, 6);
-        tempx -= 50;
-        cout<<elements[i]->data.toadox<<' '<<elements[i]->data.color<<' '<<elements[i]->data.number<<endl;
+        elements[i]->data.toadox=tempx;
+        elements[i]->data.toadoy=y_pos;
+        tempx -= disbtw2card;
+
+
     }
     SDL_RenderPresent(graphics.renderer);
 }

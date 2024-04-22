@@ -30,9 +30,15 @@ int main(int argc, char* args[])
 
 
     SDL_RenderPresent(graphics.renderer);
-   // int cardX = 300; // Tọa độ X ban đầu của quân bài
-   // int cardY = 220; // Tọa độ Y ban đầu của quân bài
-    int targetX = 550; // Tọa độ X mục tiêu của quân bài
+    int disbtw2card;
+    if(play_array[0].get_size() > mxwid/wcard)
+           disbtw2card=mxwid/play_array[0].get_size();
+    else
+          disbtw2card=wcard;
+
+    int targetX = (width+(play_array[0].get_size()-2)*disbtw2card)/2;// Tọa độ X mục tiêu của quân bài
+
+
     int targetY = 460; // Tọa độ Y mục tiêu của quân bài
     bool cardDealt = false;
     SDL_Event e;
@@ -72,12 +78,17 @@ int main(int argc, char* args[])
 			        temp_card.toadox=targetX;
 			        temp_card.toadoy=targetY;
 			        play_array[0].hand_add(temp_card);
+			        cout<<play_array[0].get_size();
                     graphics.renderTexture(temp_card.mycard, targetX, targetY, 6, 6);
                     main_deck.animateDeal(backcard,backcard, newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
                     temp_card = main_deck.draw();
 			        play_array[1].hand_add(temp_card);
                     graphics.renderTexture(backcard, targetX, targetY-420, 6, 6);
-                    targetX -= 50;
+                     if(play_array[0].get_size() > mxwid/wcard)
+                        disbtw2card=mxwid/play_array[0].get_size();
+                     else
+                         disbtw2card=wcard;
+                    targetX = (width+(play_array[0].get_size()-2)*disbtw2card)/2-(play_array[0].get_size())*disbtw2card;
                     SDL_Delay(10);
                       SDL_RenderPresent(graphics.renderer);
                 }
@@ -160,7 +171,11 @@ int main(int argc, char* args[])
                                curr_player->hand_add(draw_temp);
                                graphics.renderTexture(draw_temp.mycard, targetX, targetY, 6, 6);
                                SDL_RenderPresent(graphics.renderer);
-                               targetX-=50;
+                               if(play_array[0].get_size() > mxwid/wcard)
+                                      disbtw2card=mxwid/play_array[0].get_size();
+                               else
+                                      disbtw2card=wcard;
+                              targetX = (width+(play_array[0].get_size()-2)*disbtw2card)/2-(play_array[0].get_size())*disbtw2card;
 
                                break;
                             }
