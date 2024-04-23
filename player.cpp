@@ -150,11 +150,17 @@ card player::peek(int x,int y) const
 {
 
 	card_elem * temp_elem = head;
+	int disbtw2card;
+    if(size> (int)mxwid/wcard)
+           disbtw2card=mxwid/size;
+    else
+          disbtw2card=wcard;
+    int tempx = (width+(size-2)*disbtw2card)/2;
 	while ( temp_elem!=nullptr)
 	{
-	    if((x>=temp_elem->data.toadox)+31&&(x<temp_elem->data.toadox+81)&&(y>=temp_elem->data.toadoy)&&(y<temp_elem->data.toadoy+126))
+	     if ((x>=temp_elem->data.toadox+(wcard-disbtw2card))&&(x<temp_elem->data.toadox+81)&&(y>=temp_elem->data.toadoy)&&(y<temp_elem->data.toadoy+126))
             	return temp_elem->data;
-		temp_elem = temp_elem->next;
+		  temp_elem = temp_elem->next;
 
 	}
 

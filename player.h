@@ -13,14 +13,12 @@ class player
 		void hand_add(card temp);
 		card hand_remove(card tmp);
 		void uno();
-		void dststart();
         void print(ultis graphics,int y_pos,SDL_Texture* texture,bool kt) const;
 		int get_size() const;
+
 		card peek(int x,int y) const;
         friend class aiplayer;
-    public:
-        int targetx;
-        int disbtw2card;
+
 	private:
 		class card_elem
 		{

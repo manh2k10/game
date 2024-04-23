@@ -7,11 +7,11 @@
 #include"deck.h"
 #include"player.h"
 #include"def.h"
+#include"chucnang.h"
 class Game
 {
 
 private:
-    ultis graphics;
     bool m_isRunning;
 public:
     Game();
