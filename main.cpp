@@ -161,8 +161,22 @@ int main(int argc, char* args[])
                        if(e.button.button==SDL_BUTTON_LEFT)
                        {
                            SDL_GetMouseState(&x,&y);
+                           if(play_array[0].get_size() > mxwid/wcard)
+                                      disbtw2card=mxwid/play_array[0].get_size();
+                               else
+                                      disbtw2card=wcard;
+                              targetX = (width+(play_array[0].get_size()-2)*disbtw2card)/2-(play_array[0].get_size())*disbtw2card;
                            if(graphics.inside(x,y,graphics.toado(choosecolor,500,250,8,8)))
-                           {cout<<"1";break;}
+                           {
+                               if(x>500&&x<547&&y>250&&y<250+47)played_card.color=blue;
+                               if(x>547&&x<594&&y>250+47&&y<250+94)played_card.color=green;
+                               if(x>547&&x<594&&y>250&&y<250+47)played_card.color=red;
+                               if(x>500&&x<547&&y>250+47&&y<250+94)played_card.color=yellow;
+                               cout<<played_card.color<<endl;
+                               break;
+
+
+                           }
                            if(graphics.inside(x,y,graphics.toado(backcard,300,220,6,6)))
                            {
                                card draw_temp;

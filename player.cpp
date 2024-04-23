@@ -176,8 +176,6 @@ void player::print(ultis graphics, int y_pos,SDL_Texture* texture,bool kt) const
     else
           disbtw2card=wcard;
     int tempx = (width+(size-2)*disbtw2card)/2;
-
-   cout<<disbtw2card*size<<endl;
     for (int i = elements.size() - 1; i >= 0; i--)
     {
         if(kt)graphics.renderTexture(elements[i]->data.mycard, tempx, y_pos, 6, 6);
