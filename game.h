@@ -17,7 +17,6 @@ public:
     Game();
     ~Game();
     void Run();
-    //sinmgleton pattern
     static Game* GetInstance();
 private:
 //ham khoi tao game
