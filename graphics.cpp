@@ -72,8 +72,8 @@ void ultis::blitRect(SDL_Texture *texture, SDL_Rect *src, int x, int y)
 
         dest.x = x;
         dest.y = y;
-        dest.w = src->w;
-        dest.h = src->h;
+        dest.w = 900;
+        dest.h = 200;
 
         SDL_RenderCopy(renderer, texture, src, &dest);
     }
@@ -87,7 +87,6 @@ void ultis::renderTexture(SDL_Texture *texture, int x, int y,int w,int h)
         dest.w/=w;
         dest.h/=h;
         SDL_RenderCopy(renderer, texture, NULL, &dest);
-        cout<<dest.x<<" "<<dest.y<<" "<<dest.w<<" "<< dest.h<<endl;
     }
 SDL_Rect ultis::toado(SDL_Texture *texture, int x, int y,int w,int h)
 {

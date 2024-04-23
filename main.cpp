@@ -78,7 +78,6 @@ int main(int argc, char* args[])
 			        temp_card.toadox=targetX;
 			        temp_card.toadoy=targetY;
 			        play_array[0].hand_add(temp_card);
-			        cout<<play_array[0].get_size();
                     graphics.renderTexture(temp_card.mycard, targetX, targetY, 6, 6);
                     main_deck.animateDeal(backcard,backcard, newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
                     temp_card = main_deck.draw();
@@ -149,9 +148,6 @@ int main(int argc, char* args[])
 			     force_draw_bool = false;
 		       }
 		       int check_flag = 0 ;
-		      // cout<<played_card.color<<"ok"<<endl;
-               //int index;
-              // int size = curr_player->get_size();
                while (check_flag == 0)
                {
 
@@ -172,19 +168,26 @@ int main(int argc, char* args[])
                                if(x>547&&x<594&&y>250+47&&y<250+94)played_card.color=green;
                                if(x>547&&x<594&&y>250&&y<250+47)played_card.color=red;
                                if(x>500&&x<547&&y>250+47&&y<250+94)played_card.color=yellow;
-                               cout<<played_card.color<<endl;
                                break;
 
 
                            }
                            if(graphics.inside(x,y,graphics.toado(backcard,300,220,6,6)))
                            {
-                               card draw_temp;
+                                card draw_temp;
                                 main_deck.animateDeal(backcard,backcard, newbackground, graphics, 300, 250, targetX, targetY, play_array);
                                draw_temp = main_deck.draw();
                                curr_player->hand_add(draw_temp);
                                graphics.renderTexture(draw_temp.mycard, targetX, targetY, 6, 6);
                                SDL_RenderPresent(graphics.renderer);
+                               SDL_Rect src;
+                              src.x=0;
+                               src.y=1440/3*2;
+                               src.w=2560;
+                               src.h=1440/3;
+                               graphics.blitRect(newbackground,&src,0,400);
+
+                               play_array[0].print(graphics,targetY,backcard,true);
                                if(play_array[0].get_size() > mxwid/wcard)
                                       disbtw2card=mxwid/play_array[0].get_size();
                                else
@@ -195,7 +198,6 @@ int main(int argc, char* args[])
                             }
 
                              card tmp=curr_player->peek(x,y);
-                             cout<<tmp.number<<' '<<tmp.color<<endl;
                              if(tmp.color==played_card.color||tmp.number==played_card.number||tmp.color==0)
                              {
                                     check_flag=1;
@@ -207,13 +209,19 @@ int main(int argc, char* args[])
                                     {
                                          graphics.renderTexture(choosecolor,500,250,8,8);
                                          SDL_RenderPresent(graphics.renderer);
-
-
                                     }
+                                     if(played_card.number==10||played_card.number==11)cout<<"1";
+
 
 
                              }
 
+                             if ( curr_player->get_size() == 0 )
+		                     {
+			                     win =1;
+			                     cout  << " has won the game." << endl;
+			                     break;
+		                     }
                         }
 
                     }
