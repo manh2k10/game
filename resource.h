@@ -7,7 +7,7 @@
 #include"deck.h"
 #include"player.h"
 #include"def.h"
-
+#include"aiplayer.h"
 class Resource
 {
 public:
@@ -20,5 +20,12 @@ public:
 	static SDL_Texture* character;
 	static SDL_Texture* choosecolor;
 
+    static SDL_Texture* cred;
+	static SDL_Texture* cgreen;
+	static SDL_Texture* cblue;
+	static SDL_Texture* cyellow;
+
 	static void LoadAllData(ultis graphics);
 };
+
+

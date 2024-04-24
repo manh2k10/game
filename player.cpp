@@ -1,5 +1,6 @@
 #include "card.h"
 #include "player.h"
+
 #include <cmath>
 
 player::player()
@@ -155,7 +156,7 @@ card player::peek(int x,int y) const
            disbtw2card=mxwid/size;
     else
           disbtw2card=wcard;
-    int tempx = (width+(size-2)*disbtw2card)/2;
+   // int tempx = (width+(size-2)*disbtw2card)/2;
 	while ( temp_elem!=nullptr)
 	{
 	     if ((x>=temp_elem->data.toadox+(wcard-disbtw2card))&&(x<temp_elem->data.toadox+81)&&(y>=temp_elem->data.toadoy)&&(y<temp_elem->data.toadoy+126))
@@ -193,4 +194,26 @@ void player::print(ultis graphics, int y_pos,SDL_Texture* texture,bool kt) const
 
     }
     SDL_RenderPresent(graphics.renderer);
+}
+bool player::mycheck(card playedcard)
+{
+    card_elem* temp_ptr = head;
+    while (temp_ptr != nullptr)
+    {
+        if(temp_ptr->data.number==playedcard.number||temp_ptr->data.color==playedcard.color||temp_ptr->data.color==wild)return true;
+        temp_ptr = temp_ptr->next;
+    }
+    return false;
+}
+card  player::choosecard(card played_card)
+{
+    card chosencard=card();
+     for (card_elem* current = head; current != NULL; current = current->next) {
+            if (current->data.color == played_card.color || current->data.number == played_card.number||current->data.color==wild) {
+                chosencard = current->data;
+                break;
+            }
+        }
+        return chosencard;
+
 }
