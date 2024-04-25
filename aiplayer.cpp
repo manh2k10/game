@@ -152,7 +152,10 @@ void playturn()
     bool luotchoi=true;
      while(luotchoi)
     {
-
+           if(play_array[1].get_size()==0)
+                  {
+                      break;
+                  }
             if(play_array[1].mycheck(played_card))
                 {
                     playcard();

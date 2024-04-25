@@ -311,6 +311,34 @@ void deck::animateDeal(SDL_Texture* texture1,SDL_Texture* texture2, SDL_Texture*
 
         SDL_Delay(10); // Đợi một thời gian ngắn giữa các khung hình
     }
+    if(currentX!=endX||currentY!=endY)
+    {
+        if (displayBuffer == bufferTexture1) {
+            displayBuffer = bufferTexture2;
+        } else {
+            displayBuffer = bufferTexture1;
+        }
+
+        // Chọn bộ đệm làm mục tiêu vẽ
+        SDL_SetRenderTarget(graphics.renderer, displayBuffer);
+
+        // Xóa bộ đệm
+        SDL_RenderClear(graphics.renderer);
+
+        // Vẽ các phần tử cố định lên bộ đệm
+        SDL_RenderCopy(graphics.renderer, background, NULL, NULL);
+         graphics.renderTexture(texture1,300,250,6,6);
+        temp_player[0].print(graphics,460,texture1,true);
+        temp_player[1].print(graphics,40,texture1,false);
+
+        // Vẽ phần tử di chuyển lên bộ đệm
+        graphics.renderTexture(texture2, endX, endY, 6, 6);
+
+        // Chuyển đổi bộ đệm hiển thị lên màn hình
+        SDL_SetRenderTarget(graphics.renderer, NULL);
+        SDL_RenderCopy(graphics.renderer, displayBuffer, NULL, NULL);
+        SDL_RenderPresent(graphics.renderer);
+    }
 
     // Giải phóng bộ đệm
     SDL_DestroyTexture(bufferTexture1);

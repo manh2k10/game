@@ -111,9 +111,20 @@ void Game::Run()
 		         quit=false;
 		         checkboc=false;
                  //check=false;
+                 if(play_array[0].get_size()==0)
+                  {
+                      win=1;
+                      cout<<"you win";
+                      SDL_RenderClear(graphics.renderer);
+                       SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
+                      graphics.renderTexture(Resource::youwin,300,200,1,1);
+                      SDL_RenderPresent(graphics.renderer);
+                      break;
+                  }
                  bool luotchoi=true;
                  while(luotchoi)
                  {
+
                      checkboc=false;
                      quit=false;
 		         while(!quit)
@@ -130,37 +141,34 @@ void Game::Run()
                              {
                                   SDL_GetMouseState(&x,&y);
                                    if(!checkboc)bocbai(x,y);
+                                   //
                                   if(!play_array[0].mycheck(played_card)){luotchoi=false;quit=true;}
                                   if(y>460&&y<460+126){danhbai(x,y);if(check==false)luotchoi=false;}
                                   cout<<check<<endl;
                                   if(check)
                                   {chonmau(x,y);luotchoi=false;}
                                   if(force_draw_bool)nhanbai();
-
-
                              }
                         }
 
                      }
                     // check=false;
-
-
                   }
                   if(played_card.number==10||played_card.number==11)
                                         luotchoi=true;
                  }
 
 
-                  if(play_array[0].get_size()==0)
-                  {
-                      win=1;
-                      cout<<"you win";
-                  }
+
                    playturn();
                   if(play_array[1].get_size()==0)
                   {
                       win=1;
                       cout<<"you lose";
+                      SDL_RenderClear(graphics.renderer);
+                      SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
+                      graphics.renderTexture(Resource::youlose,0,0,3,3);
+                      SDL_RenderPresent(graphics.renderer);
                   }
 
                 }
