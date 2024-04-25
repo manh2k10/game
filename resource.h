@@ -8,6 +8,7 @@
 #include"player.h"
 #include"def.h"
 #include"aiplayer.h"
+#include <SDL_mixer.h>
 class Resource
 {
 public:
@@ -24,6 +25,18 @@ public:
 	static SDL_Texture* cgreen;
 	static SDL_Texture* cblue;
 	static SDL_Texture* cyellow;
+	static SDL_Texture* youwin;
+	static SDL_Texture* youlose;
+
+	static Mix_Chunk* loser ;
+    static Mix_Chunk* winner;
+    static Mix_Chunk* colorbutton;
+
+    static Mix_Chunk* playgame;
+    static Mix_Chunk* drawcard;
+    static Mix_Music* nhacnen;
+
+
 
 	static void LoadAllData(ultis graphics);
 };
