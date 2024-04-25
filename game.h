@@ -17,6 +17,7 @@ public:
     Game();
     ~Game();
     void Run();
+    void choilai(bool &kt,bool &cardDealt,bool & m_isRunning);
     static Game* GetInstance();
 private:
 //ham khoi tao game

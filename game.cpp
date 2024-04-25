@@ -13,11 +13,47 @@ Game::~Game()
     //huy game
     Terminate();
 }
+void Game::choilai(bool &kt,bool &cardDealt,bool & m_isRunning)
+{
+    while( SDL_PollEvent(&e) != 0)
+        {
+            cout<<226;
+            if(e.type == SDL_QUIT){m_isRunning=false;break;}
+            int x,y;
+            if(e.type==SDL_MOUSEBUTTONDOWN)
+            {
+                if(e.button.button==SDL_BUTTON_LEFT)
+                {
+                    SDL_GetMouseState(&x,&y);cout<<226;
+
+                    if(graphics.inside(x,y,graphics.toado(Resource::playagain,350,450,2,2)))
+                    {
+                        kt=true;
+                        cardDealt=false;
+                        Reset();
+                        main_deck.create(graphics);
+                        SDL_RenderClear(graphics.renderer);
+
+                        break;
+
+
+                    }
+                    if(graphics.inside(x,y,graphics.toado(Resource::exit,350,500,2,2)))
+                    {
+
+                       m_isRunning=false;
+
+                       break;
+                    }
+                }
+            }
+        }
+}
 void Game::Run()
 {
     Mix_PlayMusic( Resource::nhacnen, -1 );
     main_deck.create(graphics);
-    main_deck.quick_shuffle();
+
     // Tọa độ Y mục tiêu của quân bài
     bool cardDealt = false;
 
@@ -53,16 +89,21 @@ void Game::Run()
             }
         }
      }
-
+    bool picked;
+    main_deck.create(graphics);
     while (m_isRunning)
     {
+        cout<<123;
+            choilai(kt,cardDealt,m_isRunning);
 
-      // Uint32 windowID = SDL_GetWindowID(graphics.window);
-             while( SDL_PollEvent(&e) != 0)
+            main_deck.quick_shuffle();
+            while( SDL_PollEvent(&e) != 0)
             if(e.type == SDL_QUIT){m_isRunning=false;running=false;}
 
             if (kt && !cardDealt)
             {
+                cardDealt=true;
+
                 if(play_array[0].get_size() > mxwid/wcard)
                      disbtw2card=mxwid/play_array[0].get_size();
                 else
@@ -144,7 +185,10 @@ void Game::Run()
                       SDL_RenderClear(graphics.renderer);
                        SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youwin,100,200,1,1);
+                      graphics.renderTexture(Resource::playagain,350,450,2,2);
+                        graphics.renderTexture(Resource::exit,350,500,2,2);
                       SDL_RenderPresent(graphics.renderer);
+
                       break;
                   }
                  bool luotchoi=true;
@@ -198,7 +242,10 @@ void Game::Run()
                        Mix_PlayChannel(-1,Resource::winner,0);
                       SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youwin,230,100,1,1);
+                      graphics.renderTexture(Resource::playagain,350,450,2,2);
+                        graphics.renderTexture(Resource::exit,350,500,2,2);
                       SDL_RenderPresent(graphics.renderer);
+
                       break;
                   }
 
@@ -219,8 +266,11 @@ void Game::Run()
                        Mix_PlayChannel(-1,Resource::winner,0);
                       SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youwin,230,100,1,1);
+                      graphics.renderTexture(Resource::playagain,350,450,2,2);
+                        graphics.renderTexture(Resource::exit,350,500,2,2);
 
                       SDL_RenderPresent(graphics.renderer);
+
                       break;
                   }
 
@@ -234,9 +284,12 @@ void Game::Run()
                       SDL_RenderClear(graphics.renderer);
                       SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youlose,150,0,2,2);
+                       graphics.renderTexture(Resource::playagain,350,450,2,2);
+                        graphics.renderTexture(Resource::exit,350,500,2,2);
 
                       SDL_RenderPresent(graphics.renderer);
                       break;
+
                   }
 
                   if (main_deck.get_size() < 10)
@@ -308,4 +361,16 @@ void Game::Terminate()
 
     graphics.close();
 }
+void Game::Reset()
+{
+    deck newdeck;
 
+    temp_deck=newdeck;
+    newdeck.create(graphics);
+    newdeck.quick_shuffle();
+    main_deck=newdeck;
+
+    played_card=card();
+    play_array[0]=player();
+    play_array[1]=player();
+}
