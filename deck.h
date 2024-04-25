@@ -11,6 +11,7 @@ public:
     const deck &operator= (const deck &other);
     ~deck();
     void shuffle();
+    void newclear();
     void create(ultis graphics);
     card draw();
     int add_card(card temp_card);

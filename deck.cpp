@@ -205,7 +205,7 @@ int deck::add_card(card temp_card)
 	if(size < DECK_SIZE)
 	{
 		ptr_deck[size] = temp_card;
-		size++;
+		size+=1;
 		return 0;
 	}
 	else
@@ -343,4 +343,10 @@ void deck::animateDeal(SDL_Texture* texture1,SDL_Texture* texture2, SDL_Texture*
     // Giải phóng bộ đệm
     SDL_DestroyTexture(bufferTexture1);
     SDL_DestroyTexture(bufferTexture2);
+}
+void deck::newclear()
+{
+    delete []ptr_deck;
+	ptr_deck = new card[DECK_SIZE];
+	size = 0;
 }

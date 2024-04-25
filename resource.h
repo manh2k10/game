@@ -14,6 +14,8 @@ class Resource
 public:
 
 	static SDL_Texture* play;
+	static SDL_Texture* exit;
+	static SDL_Texture* playagain;
 	static SDL_Texture* background;
 	static SDL_Texture* newbackground;//dan
 

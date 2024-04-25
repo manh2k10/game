@@ -23,4 +23,6 @@ private:
     void Initialize();
     //ham  huy game
     void Terminate();
+    //reset
+    void Reset();
 };

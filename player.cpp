@@ -165,7 +165,7 @@ card player::peek(int x,int y) const
 
 	}
 
-	return temp_elem->data;
+	return card();
 
 }
 void player::print(ultis graphics, int y_pos,SDL_Texture* texture,bool kt) const
@@ -216,4 +216,10 @@ card  player::choosecard(card played_card)
         }
         return chosencard;
 
+}
+void player::newclear()
+{
+    clear();
+    head = NULL;
+	size = 0;
 }

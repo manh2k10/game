@@ -20,6 +20,7 @@ class player
 		card peek(int x,int y) const;
         friend class aiplayer;
         card choosecard(card played_card);
+        void newclear();
 
 	private:
 		class card_elem

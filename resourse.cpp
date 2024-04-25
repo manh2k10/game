@@ -3,6 +3,8 @@
 SDL_Texture* Resource::play;
 SDL_Texture* Resource::backcard;
 SDL_Texture* Resource::background;
+SDL_Texture* Resource::exit;
+SDL_Texture* Resource::playagain;
 
 SDL_Texture* Resource::character;
 SDL_Texture* Resource::choosecolor;
@@ -28,7 +30,10 @@ void Resource::LoadAllData(ultis graphics)
 {
     background = graphics.loadtexture("images/backgrounds.jpg");
     character = graphics.loadtexture("images/bg.png");
-    play = graphics.loadtexture("images/switch.png");
+    play = graphics.loadtexture("images/newplay.png");
+    exit = graphics.loadtexture("images/EXIT.png");
+    playagain = graphics.loadtexture("images/playagain.png");
+
 
     newbackground = graphics.loadtexture("images/backgrounds3.png");
     backcard = graphics.loadtexture("images/back.png");

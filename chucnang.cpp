@@ -13,6 +13,7 @@ bool check=false;
 bool quit;
 bool   force_draw_bool;
 bool checkboc=false;
+ktlc myktlc;
 void bocbai(int &x,int &y)
 {
          if(play_array[0].get_size() > mxwid/wcard)
@@ -23,7 +24,8 @@ void bocbai(int &x,int &y)
         if(graphics.inside(x,y,graphics.toado(Resource::backcard,300,250,6,6)))
         {
             card draw_temp;
-
+            myktlc.boc=true;
+             Mix_PlayChannel(-1,Resource::drawcard,0);
             main_deck.animateDeal(Resource::backcard,Resource::backcard,Resource:: newbackground, graphics, 300, 250, targetX, targetY, play_array);
             draw_temp = main_deck.draw();
             play_array[0].hand_add(draw_temp);
@@ -49,8 +51,8 @@ void bocbai(int &x,int &y)
 }
 void chonmau(int &x,int &y)
 {
-    graphics.renderTexture(Resource::choosecolor,550,250,8,8);
-    SDL_RenderPresent(graphics.renderer);
+    //graphics.renderTexture(Resource::choosecolor,550,250,8,8);
+   // SDL_RenderPresent(graphics.renderer);
     if(graphics.inside(x,y,graphics.toado(Resource::choosecolor,550,250,8,8)))
                            {
                                if(x>550&&x<597&&y>250&&y<250+47)
@@ -92,11 +94,14 @@ void danhbai(int &x,int &y)
                     card tmp=play_array[0].peek(x,y);
                     if((tmp.color==played_card.color||tmp.number==played_card.number||tmp.color==0))
                     {
-
+                        myktlc.danh=true;
                         play_array[0].hand_remove(tmp);
+                         Mix_PlayChannel(-1,Resource::playgame,0);
                         main_deck.animateDeal(Resource::backcard,tmp.mycard,Resource:: newbackground, graphics, tmp.toadox, tmp.toadoy, 400, 250, play_array);
-                        temp_deck.add_card(tmp);
                         played_card = tmp;
+
+                        temp_deck.add_card(tmp);
+
                         if(played_card.color==wild)
                         {
                             check=true;
@@ -127,6 +132,7 @@ void nhanbai()
 		                card draw_2;
 		                for (int i = 0 ; i < 2; i ++)
 			            {
+			                    Mix_PlayChannel(-1,Resource::drawcard,0);
 			                   main_deck.animateDeal(Resource::backcard,Resource::backcard,Resource:: newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
                                draw_2 = main_deck.draw();
                                play_array[1].hand_add(draw_2);
@@ -152,7 +158,8 @@ void nhanbai()
 		                card draw_4;
 			            for (int i = 0 ; i < 4; i ++)
 			            {
-				         main_deck.animateDeal(Resource::backcard,Resource::backcard,Resource:: newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
+			                    Mix_PlayChannel(-1,Resource::drawcard,0);
+				                main_deck.animateDeal(Resource::backcard,Resource::backcard,Resource:: newbackground, graphics, 300, 250, targetX, targetY-420, play_array);
                                draw_4 = main_deck.draw();
                                play_array[1].hand_add(draw_4);
                                graphics.renderTexture(Resource::backcard, targetX, targetY-420, 6, 6);
