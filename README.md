@@ -2,7 +2,7 @@
 - link preview game : 
 # Cài đặt 
 - Bản chạy được ngay : 
-- Bản chạy trên IDE hoặc textEditor : clone repo hoặc code -> Download ZIP
+- Bản chạy trên IDE hoặc textEditor : clone repo và chạy bằng file newuno
 
 # Nguồn
 Các hình ảnh và âm thanh trong game  nguồn chủ yếu :
