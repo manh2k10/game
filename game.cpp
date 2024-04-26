@@ -17,14 +17,14 @@ void Game::choilai(bool &kt,bool &cardDealt,bool & m_isRunning)
 {
     while( SDL_PollEvent(&e) != 0)
         {
-            cout<<226;
+
             if(e.type == SDL_QUIT){m_isRunning=false;break;}
             int x,y;
             if(e.type==SDL_MOUSEBUTTONDOWN)
             {
                 if(e.button.button==SDL_BUTTON_LEFT)
                 {
-                    SDL_GetMouseState(&x,&y);cout<<226;
+                    SDL_GetMouseState(&x,&y);
 
                     if(graphics.inside(x,y,graphics.toado(Resource::playagain,350,450,2,2)))
                     {
@@ -80,7 +80,7 @@ void Game::Run()
                     }
                     if(graphics.inside(x,y,graphics.toado(Resource::exit,350,500,2,2)))
                     {
-                       cout<<x<<y;
+
                        m_isRunning=false;
                        running=false;
                        break;
@@ -181,7 +181,7 @@ void Game::Run()
                  if(play_array[0].get_size()==0)
                   {
                       win=1;
-                      cout<<"you win";
+
                       SDL_RenderClear(graphics.renderer);
                        SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youwin,100,200,1,1);
