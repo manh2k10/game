@@ -1,7 +1,7 @@
 # UNO
-- link preview game : 
+- link preview game : https://youtu.be/otQYnI6s-cE
 # Cài đặt 
-- Bản chạy được ngay : 
+
 - Bản chạy trên IDE hoặc textEditor : clone repo và chạy bằng file newuno
 
 # Nguồn
