@@ -1,0 +1,115 @@
+# depslib dependency file v1.0
+1714143802 source:d:\bai lam 2023\ltnc\newuno\aiplayer.cpp
+	"aiplayer.h"
+	<cstdlib>
+	<time.h>
+
+1714143802 d:\bai lam 2023\ltnc\newuno\aiplayer.h
+	"card.h"
+	"graphics.h"
+	"SDL.h"
+	"SDL_image.h"
+	"player.h"
+	"chucnang.h"
+	"def.h"
+
+1714143802 d:\bai lam 2023\ltnc\newuno\card.h
+	<vector>
+	<SDL.h>
+	<SDL_image.h>
+
+1714143802 d:\bai lam 2023\ltnc\newuno\graphics.h
+	<iostream>
+	<SDL_image.h>
+	<SDL.h>
+	"def.h"
+
+1714143802 d:\bai lam 2023\ltnc\newuno\def.h
+	<SDL_image.h>
+	<SDL.h>
+
+1714143802 d:\bai lam 2023\ltnc\newuno\player.h
+	"card.h"
+	"graphics.h"
+	"SDL.h"
+	"SDL_image.h"
+
+1714143802 d:\bai lam 2023\ltnc\newuno\chucnang.h
+	<iostream>
+	<SDL_image.h>
+	<SDL.h>
+	"graphics.h"
+	"card.h"
+	"deck.h"
+	"player.h"
+	"def.h"
+	"resource.h"
+
+1714143802 d:\bai lam 2023\ltnc\newuno\deck.h
+	"card.h"
+	<cstdlib>
+	<ctime>
+	"player.h"
+	"graphics.h"
+
+1714143802 d:\bai lam 2023\ltnc\newuno\resource.h
+	<iostream>
+	<SDL_image.h>
+	<SDL.h>
+	"graphics.h"
+	"card.h"
+	"deck.h"
+	"player.h"
+	"def.h"
+	"aiplayer.h"
+	<SDL_mixer.h>
+
+1714143802 source:d:\bai lam 2023\ltnc\newuno\card.cpp
+	"card.h"
+
+1714143802 source:d:\bai lam 2023\ltnc\newuno\chucnang.cpp
+	"chucnang.h"
+
+1714143802 source:d:\bai lam 2023\ltnc\newuno\deck.cpp
+	"deck.h"
+	"graphics.h"
+
+1714143802 source:d:\bai lam 2023\ltnc\newuno\game.cpp
+	"game.h"
+	"resource.h"
+	"aiplayer.h"
+
+1714143802 d:\bai lam 2023\ltnc\newuno\game.h
+	<iostream>
+	<SDL_image.h>
+	<SDL.h>
+	"graphics.h"
+	"card.h"
+	"deck.h"
+	"player.h"
+	"def.h"
+	"chucnang.h"
+
+1714143802 source:d:\bai lam 2023\ltnc\newuno\graphics.cpp
+	"graphics.h"
+	<SDL_mixer.h>
+
+1714143802 source:d:\bai lam 2023\ltnc\newuno\main.cpp
+	<iostream>
+	<SDL_image.h>
+	<SDL.h>
+	"graphics.h"
+	"card.h"
+	"deck.h"
+	"player.h"
+	"def.h"
+	"game.h"
+
+1714143802 source:d:\bai lam 2023\ltnc\newuno\player.cpp
+	"card.h"
+	"player.h"
+	<cmath>
+
+1714143802 source:d:\bai lam 2023\ltnc\newuno\resource.cpp
+	"resource.h"
+
