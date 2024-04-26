@@ -24,11 +24,18 @@ tạo nên sự hấp dẫn và vui nhộn cho mọi đối tượng.
   - Nếu người chơi chỉ còn một lá bài trong tay, họ phải nói "Uno" để cảnh báo các người chơi khác.
   - Trò chơi tiếp tục cho đến khi một người chơi hết bài.
 + Các lá bài đặc biệt:
-  - Lá bài "Reverse" đảo chiều chơi.
-  - Lá bài "Skip" bỏ lượt chơi của người chơi tiếp theo.
-  - Lá bài "Draw Two" buộc người chơi tiếp theo phải rút hai lá bài từ bộ bài.
-  - Lá bài "Wild" cho phép người chơi chọn màu của nọc.
-  - Lá bài "Wild Draw Four" tương tự như lá bài "Wild", nhưng còn buộc người chơi tiếp theo phải rút bốn lá bài.
+  - Lá bài "Reverse" đảo chiều chơi:
+       <img src="https://github.com/manh2k10/game/blob/master/images/blue10.png" width="200" alt="card" />
+       
+  - Lá bài "Skip" bỏ lượt chơi của người chơi tiếp theo:
+       <img src="https://github.com/manh2k10/game/blob/master/images/blue11.png" width="200" alt="card" />
+       
+  - Lá bài "Draw Two" buộc người chơi tiếp theo phải rút hai lá bài từ bộ bài:
+       <img src="https://github.com/manh2k10/game/blob/master/images/blue12.png" width="200" alt="card" />
+  - Lá bài "Wild" cho phép người chơi chọn màu của nọc:
+       <img src="https://github.com/manh2k10/game/blob/master/images/wild13.png" width="200" alt="card" />
+  - Lá bài "Wild Draw Four" tương tự như lá bài "Wild", nhưng còn buộc người chơi tiếp theo phải rút bốn lá bài:
+       <img src="https://github.com/manh2k10/game/blob/master/images/wild14.png" width="200" alt="card" />
 
 # Bắt đầu game 
 - Menu : có 2 sự lựa chọn :
