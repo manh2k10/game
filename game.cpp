@@ -80,7 +80,7 @@ void Game::Run()
                     }
                     if(graphics.inside(x,y,graphics.toado(Resource::exit,350,500,2,2)))
                     {
-
+                       cout<<x<<y;
                        m_isRunning=false;
                        running=false;
                        break;
@@ -88,14 +88,14 @@ void Game::Run()
                 }
             }
         }
+        if(running==false)break;
      }
-    bool picked;
     main_deck.create(graphics);
     while (m_isRunning)
     {
-        cout<<123;
-            choilai(kt,cardDealt,m_isRunning);
 
+            choilai(kt,cardDealt,m_isRunning);
+             if(m_isRunning==false)break;
             main_deck.quick_shuffle();
             while( SDL_PollEvent(&e) != 0)
             if(e.type == SDL_QUIT){m_isRunning=false;running=false;}
@@ -185,7 +185,7 @@ void Game::Run()
                       SDL_RenderClear(graphics.renderer);
                        SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youwin,100,200,1,1);
-                      graphics.renderTexture(Resource::playagain,350,450,2,2);
+                      graphics.renderTexture(Resource::playagain,350,410,2,2);
                         graphics.renderTexture(Resource::exit,350,500,2,2);
                       SDL_RenderPresent(graphics.renderer);
 
@@ -242,7 +242,7 @@ void Game::Run()
                        Mix_PlayChannel(-1,Resource::winner,0);
                       SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youwin,230,100,1,1);
-                      graphics.renderTexture(Resource::playagain,350,450,2,2);
+                      graphics.renderTexture(Resource::playagain,350,410,2,2);
                         graphics.renderTexture(Resource::exit,350,500,2,2);
                       SDL_RenderPresent(graphics.renderer);
 
@@ -266,7 +266,7 @@ void Game::Run()
                        Mix_PlayChannel(-1,Resource::winner,0);
                       SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youwin,230,100,1,1);
-                      graphics.renderTexture(Resource::playagain,350,450,2,2);
+                      graphics.renderTexture(Resource::playagain,350,410,2,2);
                         graphics.renderTexture(Resource::exit,350,500,2,2);
 
                       SDL_RenderPresent(graphics.renderer);
@@ -284,7 +284,7 @@ void Game::Run()
                       SDL_RenderClear(graphics.renderer);
                       SDL_RenderCopy(graphics.renderer,Resource::newbackground,NULL,NULL);
                       graphics.renderTexture(Resource::youlose,150,0,2,2);
-                       graphics.renderTexture(Resource::playagain,350,450,2,2);
+                       graphics.renderTexture(Resource::playagain,350,410,2,2);
                         graphics.renderTexture(Resource::exit,350,500,2,2);
 
                       SDL_RenderPresent(graphics.renderer);
@@ -358,6 +358,8 @@ void Game::Terminate()
 
      free(Resource::youlose);
      free(Resource::youwin);
+     free(Resource::exit);
+     free(Resource::playagain);
 
     graphics.close();
 }
