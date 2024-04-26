@@ -361,6 +361,7 @@ void Game::Terminate()
      free(Resource::exit);
      free(Resource::playagain);
 
+
     graphics.close();
 }
 void Game::Reset()
