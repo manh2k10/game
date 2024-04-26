@@ -10,10 +10,16 @@
 
 #include"resource.h"
 
+struct ktlc
+{
+    bool boc;
+    bool danh;
+};
 void bocbai(int &x,int &y);
 void danhbai(int &x,int &y);
 void chonmau(int &x, int &y);
 void nhanbai();
+
 extern int targetX ;
 extern int disbtw2card;
 extern deck main_deck;
@@ -27,3 +33,4 @@ extern bool check;
 extern bool force_draw_bool;
 extern bool quit;
 extern bool checkboc;
+extern ktlc myktlc;

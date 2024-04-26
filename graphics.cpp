@@ -1,5 +1,5 @@
 #include"graphics.h"
-
+#include<SDL_mixer.h>
 void ultis::SDLInit()
 {
    SDL_Init(SDL_INIT_EVERYTHING);
@@ -9,6 +9,11 @@ void ultis::SDLInit()
 
    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_RenderSetLogicalSize(renderer, width, height);
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+                {
+                    cout<<"SDL_mixer could not initialize! SDL_mixer Error: "<<Mix_GetError();
+
+                }
 
 }
 void ultis::close()
